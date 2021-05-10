@@ -1,15 +1,27 @@
 # WinReg
 Classe para trabalhar com Registros do Windows com interfaces.
 
-Instalação
+## Instalação
 
 ``` delphi
 $boss install willhubner/WinReg
 ```
 
-Utilização
+## Utilização
 
+### Ler Registro
 ``` delphi
-TWinReg.New.OpenKey('MeuSoftware').WriteString('username', 'usuario');
-
+  TWinReg
+    .New
+    .OpenKey('MeuSoftware')
+    .ReadString('username', Variable);
 ```
+
+### Escrever Registro
+``` delphi
+  TWinReg
+    .New
+    .OpenKey('MeuSoftware')
+    .WriteString('Reg1', IntegerValue)
+    .WriteString('Reg2', StringValue);
+ ```
