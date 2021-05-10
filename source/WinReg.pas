@@ -3,6 +3,7 @@ unit WinReg;
 interface
 
 uses
+  System.SysUtils,
   WinReg.Interfaces,
   System.Win.Registry;
 
@@ -16,7 +17,8 @@ type
 
     class function New : iWinReg;
     function OpenKey(aKey : String) : iWinReg;
-    function WriteString(aKey, aValue : String) : iWinReg;
+    function WriteString(aKey, aValue : String) : iWinReg; overload;
+    function WriteString(aKey : String; aValue : Integer) : iWinReg; overload;
     function ReadString(aKey : String; var aValue : String) : iWinReg; overload;
     function ReadString(aKey : String) : String; overload;
   End;
@@ -52,6 +54,13 @@ end;
 function TWinReg.ReadString(aKey: String): String;
 begin
   Result := FReg.ReadString(aKey);
+end;
+
+function TWinReg.WriteString(aKey: String; aValue: Integer): iWinReg;
+begin
+  Result := Self;
+
+  FReg.WriteString(aKey, IntToStr(aValue));
 end;
 
 function TWinReg.ReadString(aKey: String; var aValue: String): iWinReg;
